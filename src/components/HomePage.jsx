@@ -1,13 +1,15 @@
 import Header from './Header';
 import NewsItem from './NewsItem';
 
-const HomePage = ({ handleClick, hits }) => {
+const HomePage = ({ updateState, handleClick, hits }) => {
     return (
         <div className="HomePage">
             <Header handleClick={handleClick} />
-            {hits.map(({ title, rating, author, date, id }) => {
-                return <NewsItem key={id} id={id} title={title} rating={rating} author={author} date={date} />
-            })}
+            <ul className='newsList'>
+                {hits.map(({ title, rating, author, date, id, address }, index) => {
+                    return <NewsItem updateState={updateState} address={address} key={index} id={id} title={title} rating={rating} author={author} date={date} />
+                })}
+            </ul>
         </div>
     )
 }

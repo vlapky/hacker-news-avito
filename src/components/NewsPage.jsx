@@ -1,12 +1,12 @@
 import Header from './Header';
 import { Link } from 'react-router-dom';
 
-const HomePage = ({ handleClick, title, address, date, author }) => {
+const HomePage = ({ clearState, handleClick, title, address, date, author }) => {
     const linkText = address.length > 40 ? `${address.slice(0, 39)}...` : address;
     return (
         <div className="NewsPage">
             <Header handleClick={handleClick} />
-            <Link className="title link" to='/'>
+            <Link onClick={clearState} className="link" to='/'>
                 Назад к новостям
             </Link>
             <h2 className="title">{title}</h2>
