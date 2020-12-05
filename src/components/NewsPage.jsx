@@ -1,4 +1,5 @@
 import Header from './Header';
+import Footer from './Footer';
 import { Link } from 'react-router-dom';
 
 const HomePage = ({ clearState, handleClick, title, address, date, author }) => {
@@ -6,13 +7,16 @@ const HomePage = ({ clearState, handleClick, title, address, date, author }) => 
     return (
         <div className="NewsPage">
             <Header handleClick={handleClick} />
-            <Link onClick={clearState} className="link" to='/'>
-                Назад к новостям
-            </Link>
-            <h2 className="title">{title}</h2>
-            <a href={address} target='_blanck'>{linkText}</a>
-            <span className="date">{` ${date} |`}</span>
-            <span className="author">{` ${author}`}</span>
+            <div className="NewsPageContent">
+                <Link onClick={clearState} className="link" to='/'>
+                    Назад к новостям
+                </Link>
+                <h2 className="title">{title}</h2>
+                <a className='NewsAddress' href={address} target='_blanck'>{linkText}</a>
+                <span className="date">{date}</span>
+                <span className="author">by {author}</span>
+            </div>
+            <Footer />
         </div>
     )
 }

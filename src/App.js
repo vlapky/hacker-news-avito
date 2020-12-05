@@ -3,78 +3,39 @@ import './styles/App.css';
 
 import { Switch, Route } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import HomePage from './components/HomePage';
 import NewsPage from './components/NewsPage';
+
 import { Component } from 'react';
 
-const exampleItems = [
-  {
-    title: 'Fjfsjdskjds',
-    rating: '1232300',
-    author: 'JoSdsdsd',
-    date: Date().slice(3, 15),
-    id: `${Date().slice(3, 15)}Fjfsjdskjds`,
-    address: 'https://www.google.ru/'
-  },
-  {
-    title: 'Djjijdwdw',
-    rating: '1211000',
-    author: 'JFWFWo',
-    date: Date().slice(3, 15),
-    id: `${Date().slice(3, 15)}Djjijdwdw`,
-    address: 'https://www.google.ru/1'
-  },
-  {
-    title: 'KJKLjskds',
-    rating: '1211000',
-    author: 'JFWFWo',
-    date: Date().slice(3, 15),
-    id: `${Date().slice(3, 15)}KJKLjskds`,
-    address: 'https://www.google.ru/2'
-  },
-  {
-    title: 'sdssds',
-    rating: '1211000',
-    author: 'JFWFWo',
-    date: Date().slice(3, 15),
-    id: `${Date().slice(3, 15)}sdssds`,
-    address: 'https://www.google.ru/3'
-  },];
+import { createNewsPage, removeNewsPage } from './redux/actionCreator';
+
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      id: '',
-      title: '',
-      address: '',
-      author: '',
-      date: ''
-    }
-  }
-  updateState = (newState) => {
-    this.setState(newState);
-    
+  updateState = ({ id, title, address, author, date }) => {
+    const createNewsPage = this.props.createNewsPage;
+    createNewsPage(id, title, address, author, date);
+    console.log(this.props.newsPage);
   }
   clearState = () => {
-    this.setState({
-      id: '',
-      title: '',
-      address: '',
-      author: '',
-      date: ''
-    });
-    
+    const removeNewsPage = this.props.removeNewsPage;
+    removeNewsPage();
+    console.log(this.props.newsPage);
   }
+
   render() {
-    const { id, title, address, date, author } = this.state;
+    const { id, title, address, date, author } = this.props.newsPage;
+    const hits = this.props.hits;
+
     return (
       <div className="App">
         <Switch>
           <Route exact path='/' render={(props) => <HomePage
             {...props}
             updateState={this.updateState}
-            hits={exampleItems} />} />
+            hits={hits} />} />
           <Route path='/:id' render={(props) => <NewsPage
             clearState={this.clearState}
             id={id}
@@ -88,4 +49,13 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  ({ newsPage, hits }) => ({
+    newsPage,
+    hits
+  }),
+  {
+    createNewsPage,
+    removeNewsPage
+  }
+)(App);

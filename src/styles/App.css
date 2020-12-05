@@ -1,0 +1,91 @@
+.App {
+    font-family: Roboto;
+    background-color: #f2f3f4;
+    
+}
+
+.Header {
+    background-color: #8b00ff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.Header button {
+    background-color: #f2f3f4;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-left: 20px;
+}
+.Header button:hover {
+    background-color: #c0c0c0;
+}
+
+.Header .title {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.Footer {
+    background-color: #6f00cc;
+    color: #ffffff;
+    text-align: center;
+    height: 30px;
+}
+
+.Footer h6 {
+    font-size: 10px;
+    padding-top: 5px;
+    padding-top: 8px;
+}
+
+.NewsList {
+    list-style: none;
+    min-height: 100vh;
+}
+.NewsPageContent {
+    min-height: 100vh;
+}
+
+.NewsItem {
+    margin-bottom: 26px;
+}
+
+.rating {
+    color: #4e4e4e;
+    margin-right: 8px;
+    font-weight: bold;
+}
+.author {
+    color: #4e4e4e;
+    margin-right: 8px;
+}
+.date {
+    color: #4e4e4e;
+    margin-right: 8px;
+    text-decoration: underline;
+}
+
+.HomePage .link {
+    color: #000;
+    text-decoration: none;
+}
+
+.NewsPageContent {
+    display: block;
+    margin: 20px 40px;
+}
+
+.NewsAddress {
+    display: block;
+    margin-bottom: 15px;
+}
+.NewsPageContent .link {
+    color: #777;
+    text-decoration: none;
+}
+
+.NewsPageContent .link:hover {
+    text-decoration: underline;
+}
