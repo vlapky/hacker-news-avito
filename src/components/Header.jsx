@@ -2,7 +2,7 @@ const Header = ({ handleClick }) => {
     return(
         <div className="Header">
             <div className="BtnUpdateNews">
-                <button onClick={handleClick}>Обновить</button>
+                <button onClick={handleClick}>Reload</button>
             </div>
             <div className="title">
                 <h1>Hacker News</h1>

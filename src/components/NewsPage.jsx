@@ -9,7 +9,7 @@ const HomePage = ({ clearState, handleClick, title, address, date, author }) => 
             <Header handleClick={handleClick} />
             <div className="NewsPageContent">
                 <Link onClick={clearState} className="link" to='/'>
-                    Назад к новостям
+                    Back to News
                 </Link>
                 <h2 className="title">{title}</h2>
                 <a className='NewsAddress' href={address} target='_blanck'>{linkText}</a>

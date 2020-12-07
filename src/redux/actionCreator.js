@@ -28,7 +28,7 @@ export function fetchNews() {
             fetch('https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty')
                 .then(response => response.json())
                 .then(newsIds => {
-                    newsIds.map(function (id) {
+                    newsIds.slice(0, 100).map(function (id) {
                         return (
                             fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
                             .then(response => response.json())

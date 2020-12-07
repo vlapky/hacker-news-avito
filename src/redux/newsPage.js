@@ -9,7 +9,7 @@ const BASE = {
 };
 
 const newsPage = (state = BASE, { type, id, title, address, author, date }) => {
-    console.log(type, address );
+    //console.log(type, address );
     switch (type) {
         case CREATE_NEWS_PAGE:
           return {

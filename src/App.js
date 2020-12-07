@@ -10,9 +10,14 @@ import NewsPage from './components/NewsPage';
 
 import { Component } from 'react';
 
-import { createNewsPage, removeNewsPage } from './redux/actionCreator';
+import { createNewsPage, removeNewsPage, fetchNews } from './redux/actionCreator';
 
 class App extends Component {
+
+  componentDidMount() {
+    const fetchNews = this.props.fetchNews;
+    fetchNews();
+  }
 
   updateState = ({ id, title, address, author, date }) => {
     const createNewsPage = this.props.createNewsPage;
@@ -26,7 +31,7 @@ class App extends Component {
 
   render() {
     const { id, title, address, date, author } = this.props.newsPage;
-    const hits = this.props.hits;
+    const hits = this.props.hits.newsList;
 
     return (
       <div className="App">
@@ -55,6 +60,7 @@ export default connect(
   }),
   {
     createNewsPage,
-    removeNewsPage
+    removeNewsPage,
+    fetchNews
   }
 )(App);
