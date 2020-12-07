@@ -1,8 +1,8 @@
-const Header = ({ handleClick }) => {
-    return(
+const Header = (props) => {
+    return (
         <div className="Header">
             <div className="BtnUpdateNews">
-                <button onClick={handleClick}>Reload</button>
+                <button>Reload</button>
             </div>
             <div className="title">
                 <h1>Hacker News</h1>

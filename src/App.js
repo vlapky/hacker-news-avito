@@ -10,7 +10,7 @@ import NewsPage from './components/NewsPage';
 
 import { Component } from 'react';
 
-import { createNewsPage, removeNewsPage, fetchNews } from './redux/actionCreator';
+import { fetchNews, fetchSingleNews } from './redux/actionCreator';
 
 class App extends Component {
 
@@ -19,34 +19,28 @@ class App extends Component {
     fetchNews();
   }
 
-  updateState = ({ id, title, address, author, date }) => {
-    const createNewsPage = this.props.createNewsPage;
-    createNewsPage(id, title, address, author, date);
-    
-  }
-  clearState = () => {
-    const removeNewsPage = this.props.removeNewsPage;
-    removeNewsPage();
+  loadSingleNews = (id) => {
+    this.props.fetchSingleNews(id);
   }
 
   render() {
-    const { id, title, address, date, author } = this.props.newsPage;
     const hits = this.props.hits.newsList;
+    const singleNews = this.props.hits.singleNews;
 
     return (
       <div className="App">
         <Switch>
           <Route exact path='/' render={(props) => <HomePage
             {...props}
-            updateState={this.updateState}
             hits={hits} />} />
           <Route path='/:id' render={(props) => <NewsPage
-            clearState={this.clearState}
-            id={id}
-            title={title}
-            address={address}
-            date={date}
-            author={author} />} />
+            {...props}
+            loadSingleNews={this.loadSingleNews}
+            kids={singleNews.kids}
+            title={singleNews.title}
+            address={singleNews.url}
+            date={new Date(singleNews.time*1000).toString().slice(3, 24)}
+            author={singleNews.by} />} />
         </Switch>
       </div>
     );
@@ -54,13 +48,11 @@ class App extends Component {
 }
 
 export default connect(
-  ({ newsPage, hits }) => ({
-    newsPage,
+  ({ hits }) => ({
     hits
   }),
   {
-    createNewsPage,
-    removeNewsPage,
-    fetchNews
+    fetchNews,
+    fetchSingleNews
   }
 )(App);

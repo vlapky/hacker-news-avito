@@ -3,13 +3,7 @@ import { Link } from 'react-router-dom';
 const NewsItem = ({ updateState, id, title, rating, author, date, address }) => {
     return (
         <li className="NewsItem">
-            <Link onClick={() => {
-                updateState(
-                    {
-                        id, title, rating, author, date, address
-                    }
-                )
-            }}
+            <Link
                 className="title link" to={`/${id}`}>
                 <h2 className="title">{title}</h2>
                 <span className="rating">{rating} score</span>
