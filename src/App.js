@@ -12,17 +12,16 @@ import { Component } from 'react';
 
 import { createNewsPage, removeNewsPage } from './redux/actionCreator';
 
-
 class App extends Component {
+
   updateState = ({ id, title, address, author, date }) => {
     const createNewsPage = this.props.createNewsPage;
     createNewsPage(id, title, address, author, date);
-    console.log(this.props.newsPage);
+    
   }
   clearState = () => {
     const removeNewsPage = this.props.removeNewsPage;
     removeNewsPage();
-    console.log(this.props.newsPage);
   }
 
   render() {

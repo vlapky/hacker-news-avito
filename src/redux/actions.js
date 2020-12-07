@@ -1,3 +1,5 @@
 export const CREATE_NEWS_PAGE = 'CREATE_NEWS_PAGE';
 export const REMOVE_NEWS_PAGE = 'REMOVE_NEWS_PAGE';
-export const RELOAD_NEWS_LIST = 'RELOAD_NEWS_LIST';
+
+export const LOADING_NEWS = 'LOADING_NEWS';
+export const FETCHING_NEWS = 'FETCHING_NEWS';

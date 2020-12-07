@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-const NewsItem = ({ updateState, key, id, title, rating, author, date, address }) => {
+const NewsItem = ({ updateState, id, title, rating, author, date, address }) => {
     return (
-        <li key={key} className="NewsItem">
+        <li className="NewsItem">
             <Link onClick={() => {
                 updateState(
                     {

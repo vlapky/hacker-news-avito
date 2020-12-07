@@ -1,5 +1,3 @@
-import { RELOAD_NEWS_LIST } from './actions';
-
 const BASE = [
       {
         title: 'Fjfsjdskjds',
