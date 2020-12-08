@@ -5,15 +5,17 @@ import {
     LOADING_COMMENTS
 } from './actions';
 
+let updateNews = true;
+
 export const newsClear = () => {
     return (dispatch) => {
-        dispatch({type: 'NEWS_CLEAR'})
+        dispatch({ type: 'NEWS_CLEAR' })
     }
 }
 
 export const newsPageClear = () => {
     return (dispatch) => {
-        dispatch({type: 'NEWS_PAGE_CLEAR'})
+        dispatch({ type: 'NEWS_PAGE_CLEAR' })
     }
 }
 
@@ -69,5 +71,21 @@ export function fetchComments(id) {
                     })
                 })
         )
+    }
+}
+export function autoUpdateNewsSwitch(flag) {
+    updateNews = flag;
+    return { type: 'SWITCH_UPDATE' };
+}
+
+export function updateNewsWithTimeout() {
+    return function (dispatch) {
+        setTimeout(function tick() {
+            if (updateNews === true) {
+                dispatch(newsClear());
+                dispatch(fetchNews());
+                setTimeout(tick, 60000);
+            }
+        }, 60000)
     }
 }

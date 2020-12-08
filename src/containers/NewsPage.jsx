@@ -8,6 +8,7 @@ import Comments from './Comments';
 class NewsPage extends Component {
     componentDidMount = () => {
         this.props.loadSingleNews(this.props.match.params.id);
+        this.props.autoUpdateNewsSwitch(false);
     }
 
     reloadButton = () => {

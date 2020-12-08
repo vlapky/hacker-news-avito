@@ -3,10 +3,10 @@ const Comment = (props) => {
     const date = new Date(time * 1000).toString().slice(3, 24);
 
     return(
-        <li className="Comment">
+        <div className="Comment">
             <p className="text">{text}</p>
             <span>{`${date} by ${by}`} </span>
-        </li>
+        </div>
     )
 }
 

@@ -10,6 +10,8 @@ class HomePage extends Component {
     }
     componentDidMount = () => {
         this.props.loadHomePage();
+        this.props.autoUpdateNewsSwitch(true);
+        this.props.updateNewsWithTimeout();
     }
     reloadButton = () => {
         this.props.loadHomePage();
@@ -21,6 +23,7 @@ class HomePage extends Component {
                 <Header reloadButton={this.reloadButton} />
                 <ul className='NewsList'>
                     {hits && hits !== null && hits.map((news) => {
+                        if(news===null) return <p>Error news=null</p>;
                         let id = news.id ? news.id : '';
                         let score = news.score ? news.score : '0';
                         let by = news.by ? news.by : 'unknown author';

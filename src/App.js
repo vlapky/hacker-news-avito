@@ -10,7 +10,7 @@ import NewsPage from './containers/NewsPage';
 
 import { Component } from 'react';
 
-import { fetchNews, fetchSingleNews, fetchComments, newsClear, newsPageClear } from './redux/actionCreator';
+import { fetchNews, fetchSingleNews, fetchComments, newsClear, newsPageClear, updateNewsWithTimeout, autoUpdateNewsSwitch } from './redux/actionCreator';
 
 class App extends Component {
 
@@ -44,6 +44,8 @@ class App extends Component {
             exact path='/'
             render={() =>
               <HomePage
+                autoUpdateNewsSwitch={this.props.autoUpdateNewsSwitch}
+                updateNewsWithTimeout={this.props.updateNewsWithTimeout}
                 loadHomePage={this.loadHomePage}
                 hits={newsList} />} />
           <Route
@@ -52,6 +54,7 @@ class App extends Component {
               <NewsPage
                 {...props}
                 newsPageClear={this.props.newsPageClear}
+                autoUpdateNewsSwitch={this.props.autoUpdateNewsSwitch}
                 loadSingleNews={this.loadSingleNews}
                 loadComments={this.loadComments}
                 newsData={singleNews}
@@ -71,6 +74,8 @@ export default connect(
     fetchSingleNews,
     fetchComments,
     newsClear,
-    newsPageClear
+    newsPageClear,
+    updateNewsWithTimeout,
+    autoUpdateNewsSwitch
   }
 )(App);
