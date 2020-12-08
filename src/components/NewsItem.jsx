@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const NewsItem = ({ updateState, id, title, rating, author, date, address }) => {
+const NewsItem = ({ id, title, rating, author, date }) => {
     return (
         <li className="NewsItem">
             <Link

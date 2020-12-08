@@ -1,8 +1,7 @@
-import newsPage from './newsPage';
 import hits from './hits';
 
 import { combineReducers } from 'redux';
 
-const rootReducer = combineReducers({ newsPage, hits });
+const rootReducer = combineReducers({ hits });
 
 export default rootReducer;
