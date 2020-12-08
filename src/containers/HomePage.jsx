@@ -5,16 +5,22 @@ import Footer from '../components/Footer';
 import NewsItem from '../components/NewsItem';
 
 class HomePage extends Component {
+    state = {
+        ren: 0
+    }
     componentDidMount = () => {
+        this.props.loadHomePage();
+    }
+    reloadButton = () => {
         this.props.loadHomePage();
     }
     render() {
         const { hits } = this.props;
         return (
             <div className="HomePage">
-                <Header reloadButton />
+                <Header reloadButton={this.reloadButton} />
                 <ul className='NewsList'>
-                    {hits && hits.map((news) => {
+                    {hits && hits !== null && hits.map((news) => {
                         let id = news.id ? news.id : '';
                         let score = news.score ? news.score : '0';
                         let by = news.by ? news.by : 'unknown author';

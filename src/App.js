@@ -10,7 +10,7 @@ import NewsPage from './containers/NewsPage';
 
 import { Component } from 'react';
 
-import { fetchNews, fetchSingleNews, fetchComments } from './redux/actionCreator';
+import { fetchNews, fetchSingleNews, fetchComments, newsClear, newsPageClear } from './redux/actionCreator';
 
 class App extends Component {
 
@@ -19,11 +19,16 @@ class App extends Component {
   //   fetchNews();
   // }
   loadHomePage = () => {
+    this.props.newsClear();
     this.props.fetchNews();
   }
 
   loadSingleNews = (id) => {
     this.props.fetchSingleNews(id);
+  }
+
+  loadComments = (id) => {
+    this.props.fetchComments(id);
   }
 
 
@@ -46,6 +51,7 @@ class App extends Component {
             render={(props) =>
               <NewsPage
                 {...props}
+                newsPageClear={this.props.newsPageClear}
                 loadSingleNews={this.loadSingleNews}
                 loadComments={this.loadComments}
                 newsData={singleNews}
@@ -63,5 +69,8 @@ export default connect(
   {
     fetchNews,
     fetchSingleNews,
+    fetchComments,
+    newsClear,
+    newsPageClear
   }
 )(App);

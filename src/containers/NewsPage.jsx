@@ -9,17 +9,27 @@ class NewsPage extends Component {
     componentDidMount = () => {
         this.props.loadSingleNews(this.props.match.params.id);
     }
+
+    reloadButton = () => {
+        
+    }
     render() {
         const { title, url, time, by, text, kids } = this.props.newsData;
 
+        const id = this.props.match.params.id
+
         const date = new Date(time * 1000).toString().slice(3, 24);
         const linkText = url && url !== '' && url.length && url.length > 40 ? `${url.slice(0, 39)}...` : url;
-
+        console.log(this.props.comments);
         return (
             <div className="NewsPage">
-                <Header />
+                <Header reloadButton={this.reloadButton} />
                 <div className="NewsPageContent">
-                    <Link className="link" to='/'>
+                    <Link 
+                    className="link" 
+                    to='/'
+                    onClick={this.props.newsPageClear}
+                    >
                         Back to News
                     </Link>
                     {title && <h2 className="title">{title}</h2>}
@@ -29,10 +39,11 @@ class NewsPage extends Component {
                         <span className="date">{date}</span>
                         <span className="author">by {by}</span>
                     </div>
-                    {kids && <Comments 
-                    comments={this.props.comments}
-                    loadComments={this.props.loadComments}
-                    kids={kids} />}
+                    {kids && <Comments
+                        comments={this.props.comments}
+                        loadComments={this.props.loadComments}
+                        id={id}
+                        kids={kids} />}
                 </div>
                 <Footer />
             </div>

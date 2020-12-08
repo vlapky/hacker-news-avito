@@ -5,6 +5,18 @@ import {
     LOADING_COMMENTS
 } from './actions';
 
+export const newsClear = () => {
+    return (dispatch) => {
+        dispatch({type: 'NEWS_CLEAR'})
+    }
+}
+
+export const newsPageClear = () => {
+    return (dispatch) => {
+        dispatch({type: 'NEWS_PAGE_CLEAR'})
+    }
+}
+
 export function fetchNews() {
     return (dispatch) => {
         dispatch({ type: LOADING_NEWS });
@@ -39,4 +51,23 @@ export function fetchSingleNews(newsId) {
     }
 }
 
-
+export function fetchComments(id) {
+    return (dispatch) => {
+        dispatch({ type: LOADING_COMMENTS });
+        return (
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
+                .then(response => response.json())
+                .then(news => {
+                    news.kids.slice(0, 100).map(function (item) {
+                        return (
+                            fetch(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
+                                .then(response => response.json())
+                                .then(com => {
+                                    dispatch({ type: FETCH_COMMENTS, payload: com })
+                                })
+                        )
+                    })
+                })
+        )
+    }
+}

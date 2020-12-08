@@ -89,3 +89,7 @@
 .NewsPageContent .link:hover {
     text-decoration: underline;
 }
+.Comment {
+    list-style: none;
+    margin-bottom: 30px;
+}
