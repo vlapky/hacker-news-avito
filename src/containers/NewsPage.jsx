@@ -6,7 +6,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Comments from './Comments';
 
-import { clearSingleNews, fetchSingleNews, autoUpdateNewsSwitch  } from '../redux/actions/actionCreator';
+import { clearSingleNews, fetchSingleNews, autoUpdateNewsSwitch, 
+    fetchComments, clearComments } from '../redux/actions/actionCreator';
 
 class NewsPage extends Component {
     componentDidMount = () => {
@@ -16,8 +17,10 @@ class NewsPage extends Component {
     }
 
     reloadButton = () => {
-        
+        this.props.clearComments();
+        this.props.fetchComments(this.props.match.params.id);
     }
+
     render() {
         const { title, url, time, by, text, kids } = this.props.singleNews;
 
@@ -31,11 +34,9 @@ class NewsPage extends Component {
                 <Header reloadButton={this.reloadButton} />
 
                 <div className="NewsPageContent">
-                    <Link 
-                    className="link" 
-                    to='/'
-                    onClick={this.props.clearSingleNews}
-                    >
+                    <Link
+                        className="link"
+                        to='/' >
                         Back to News
                     </Link>
 
@@ -46,7 +47,7 @@ class NewsPage extends Component {
                         <span className="date">{date}</span>
                         <span className="author">by {by}</span>
                     </div>
-                    
+
                     {kids && <Comments id={id} />}
                 </div>
 
@@ -60,7 +61,10 @@ export default connect(
     ({ singleNews }) => ({
         singleNews
     }),
-    {
+    {   
+        clearComments,
+        fetchComments,
+
         clearSingleNews,
         fetchSingleNews,
         autoUpdateNewsSwitch

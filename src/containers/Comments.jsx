@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+
 import Comment from '../components/Comment';
 
 import { clearComments, fetchComments, autoUpdateComments, autoUpdateCommentsSwitch  } from '../redux/actions/actionCreator';
@@ -7,6 +8,9 @@ import { clearComments, fetchComments, autoUpdateComments, autoUpdateCommentsSwi
 class Comments extends Component {
     componentDidMount () {
         this.props.fetchComments(this.props.id);
+
+        this.props.autoUpdateCommentsSwitch(true);
+        this.props.autoUpdateComments(this.props.id);
     }
     render() {
         const { comments } = this.props;

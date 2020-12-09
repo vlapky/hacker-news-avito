@@ -1,7 +1,6 @@
 .App {
     font-family: Roboto;
     background-color: #f2f3f4;
-    
 }
 
 .Header {
@@ -91,4 +90,28 @@
 }
 .Comment {
     font-size: 12px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.Comment button {
+    outline: none;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.Comment button:hover {
+    background-color: #8b00ff;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.SubComments {
+    margin-left: 30px;
+}
+
+.SubComments .SubComments {
+    margin-left: 30px;
 }

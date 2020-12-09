@@ -5,10 +5,15 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NewsItem from '../components/NewsItem';
 
-import { clearNews, fetchNews, autoUpdateNews, autoUpdateNewsSwitch } from '../redux/actions/actionCreator';
+import { clearNews, fetchNews, autoUpdateNews, autoUpdateNewsSwitch, 
+    clearComments, clearSingleNews, autoUpdateCommentsSwitch } from '../redux/actions/actionCreator';
 
 class HomePage extends Component {
     componentDidMount = () => {
+        this.props.autoUpdateCommentsSwitch(false);
+        this.props.clearComments();
+        this.props.clearSingleNews();
+
         this.props.fetchNews();
 
         this.props.autoUpdateNewsSwitch(true);
@@ -56,7 +61,11 @@ export default connect(
     ({ newsList }) => ({
         newsList
     }),
-    {
+    {   
+        clearComments,
+        clearSingleNews,
+        autoUpdateCommentsSwitch,
+
         clearNews,
         fetchNews,
         autoUpdateNews,

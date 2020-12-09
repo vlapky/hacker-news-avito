@@ -70,7 +70,7 @@ export function fetchComments(id) {
             fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
                 .then(response => response.json())
                 .then(news => {
-                    news.kids.slice(0, 100).map(function (item) {
+                    news.kids && news.kids.slice(0, 100).map(function (item) {
                         return (
                             fetch(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
                                 .then(response => response.json())
@@ -105,12 +105,12 @@ export function autoUpdateNews() {
     }
 }
 
-export function autoUpdateComments() {
+export function autoUpdateComments(id) {
     return function (dispatch) {
         setTimeout(function tick() {
             if (updateCommentsFlag === true) {
                 dispatch(clearComments());
-                dispatch(fetchComments());
+                dispatch(fetchComments(id));
                 setTimeout(tick, 60000);
             }
         }, 60000)
