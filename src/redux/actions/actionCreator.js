@@ -1,21 +1,31 @@
 import {
-    LOADING_NEWS, FETCHING_NEWS,
-    LOADING_SINGLE_NEWS, FETCH_SINGLE_NEWS,
-    FETCH_COMMENTS,
-    LOADING_COMMENTS
+    CLEAR_NEWS, LOADING_NEWS, FETCHING_NEWS,
+
+    CLEAR_SINGLE_NEWS, LOADING_SINGLE_NEWS, FETCH_SINGLE_NEWS,
+    
+    CLEAR_COMMENTS, LOADING_COMMENTS, FETCHING_COMMENTS, 
+    
+    SWITCH_NEWS_FLAG, SWITCH_COMMENTS_FLAG,
 } from './actions';
 
-let updateNews = true;
+let updateNewsFlag = true;
+let updateCommentsFlag = false;
 
-export const newsClear = () => {
+export const clearNews = () => {
     return (dispatch) => {
-        dispatch({ type: 'NEWS_CLEAR' })
+        dispatch({ type: CLEAR_NEWS })
     }
 }
 
-export const newsPageClear = () => {
+export const clearSingleNews = () => {
     return (dispatch) => {
-        dispatch({ type: 'NEWS_PAGE_CLEAR' })
+        dispatch({ type: CLEAR_SINGLE_NEWS })
+    }
+}
+
+export const clearComments = () => {
+    return (dispatch) => {
+        dispatch({ type: CLEAR_COMMENTS })
     }
 }
 
@@ -65,7 +75,7 @@ export function fetchComments(id) {
                             fetch(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
                                 .then(response => response.json())
                                 .then(com => {
-                                    dispatch({ type: FETCH_COMMENTS, payload: com })
+                                    dispatch({ type: FETCHING_COMMENTS, payload: com })
                                 })
                         )
                     })
@@ -74,16 +84,33 @@ export function fetchComments(id) {
     }
 }
 export function autoUpdateNewsSwitch(flag) {
-    updateNews = flag;
-    return { type: 'SWITCH_UPDATE' };
+    updateNewsFlag = flag;
+    return { type: SWITCH_NEWS_FLAG };
 }
 
-export function updateNewsWithTimeout() {
+export function autoUpdateCommentsSwitch(flag) {
+    updateCommentsFlag = flag;
+    return { type: SWITCH_COMMENTS_FLAG };
+}
+
+export function autoUpdateNews() {
     return function (dispatch) {
         setTimeout(function tick() {
-            if (updateNews === true) {
-                dispatch(newsClear());
+            if (updateNewsFlag === true) {
+                dispatch(clearNews());
                 dispatch(fetchNews());
+                setTimeout(tick, 60000);
+            }
+        }, 60000)
+    }
+}
+
+export function autoUpdateComments() {
+    return function (dispatch) {
+        setTimeout(function tick() {
+            if (updateCommentsFlag === true) {
+                dispatch(clearComments());
+                dispatch(fetchComments());
                 setTimeout(tick, 60000);
             }
         }, 60000)

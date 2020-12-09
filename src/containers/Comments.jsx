@@ -1,19 +1,24 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import Comment from '../components/Comment';
+
+import { clearComments, fetchComments, autoUpdateComments, autoUpdateCommentsSwitch  } from '../redux/actions/actionCreator';
 
 class Comments extends Component {
     componentDidMount () {
-        this.props.loadComments(this.props.id);
+        this.props.fetchComments(this.props.id);
     }
     render() {
-        console.log(this.props.comments);
+        const { comments } = this.props;
         return (
             <div className="Comments">
+
                 <div className="countComments">
-                    <p>{`Comments ${this.props.kids.length}`}</p>
+                    <p>{`Comments ${comments.length}`}</p>
                 </div>
-                {this.props.comments.map(item => 
-                    <Comment key={item.id} item={item} />
+
+                {comments.map(commentData => 
+                    <Comment key={commentData.id} commentData={commentData} />
                 )}
                 
             </div>
@@ -21,4 +26,14 @@ class Comments extends Component {
     }
 }
 
-export default Comments;
+export default connect(
+    ({ comments }) => ({
+        comments
+    }),
+    {
+        clearComments,
+        fetchComments,
+        autoUpdateComments,
+        autoUpdateCommentsSwitch
+    }
+)(Comments);

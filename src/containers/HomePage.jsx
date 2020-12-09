@@ -1,29 +1,35 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NewsItem from '../components/NewsItem';
 
+import { clearNews, fetchNews, autoUpdateNews, autoUpdateNewsSwitch } from '../redux/actions/actionCreator';
+
 class HomePage extends Component {
-    state = {
-        ren: 0
-    }
     componentDidMount = () => {
-        this.props.loadHomePage();
+        this.props.fetchNews();
+
         this.props.autoUpdateNewsSwitch(true);
-        this.props.updateNewsWithTimeout();
+        this.props.autoUpdateNews();
     }
     reloadButton = () => {
-        this.props.loadHomePage();
+        this.props.clearNews();
+        this.props.fetchNews();
     }
     render() {
-        const { hits } = this.props;
+        const { newsList } = this.props;
+
         return (
             <div className="HomePage">
                 <Header reloadButton={this.reloadButton} />
+
                 <ul className='NewsList'>
-                    {hits && hits !== null && hits.map((news) => {
-                        if(news===null) return <p>Error news=null</p>;
+                    {newsList && newsList !== null && newsList.map((news) => {
+
+                        if (news === null) return <p>LOADING ERROR</p>;
+
                         let id = news.id ? news.id : '';
                         let score = news.score ? news.score : '0';
                         let by = news.by ? news.by : 'unknown author';
@@ -39,10 +45,21 @@ class HomePage extends Component {
                             date={date} />
                     })}
                 </ul>
+
                 <Footer />
             </div>
         )
     }
 }
 
-export default HomePage;
+export default connect(
+    ({ newsList }) => ({
+        newsList
+    }),
+    {
+        clearNews,
+        fetchNews,
+        autoUpdateNews,
+        autoUpdateNewsSwitch
+    }
+)(HomePage);

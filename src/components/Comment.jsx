@@ -1,5 +1,5 @@
-const Comment = (props) => {
-    const { text, by, time, id } = props.item;
+const Comment = ({ commentData }) => {
+    const { text, by, time, id } = commentData;
     const date = new Date(time * 1000).toString().slice(3, 24);
 
     return(
