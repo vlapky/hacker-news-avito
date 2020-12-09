@@ -12,7 +12,10 @@
 
 __Стилизовано на чистом CSS__
 
+Использован [официальный API Hacker News](https://github.com/HackerNews/API)
+
 __Домашняя страница__
 ![HomePage](/imgForGitHub/HomePage.png)
+
 __Страница новости__
 ![NewsPage](/imgForGitHub/NewsPageAndComments.png)
