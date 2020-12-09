@@ -10,7 +10,7 @@
 * react-redux
 * redux-thunk
 
-__Стилизированно на чистом CSS__
+__Стилизовано на чистом CSS__
 
 __Домашняя страница__
 ![HomePage](/imgForGitHub/HomePage.png)
